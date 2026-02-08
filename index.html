@@ -3,349 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEETIO Partner Dashboard</title>
+    <title>MEETIO Talk - Podcast Guest & Sponsor Portal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <!-- Sidebar Navigation -->
-        <nav class="sidebar">
+        <!-- Header -->
+        <header>
             <div class="logo">
                 <i class="fas fa-podcast"></i>
-                <span>MEETIO</span>
+                <span>MÉETIO Talk</span>
             </div>
-            
-            <div class="nav-section">
-                <h3>MAIN</h3>
-                <ul class="nav-menu">
-                    <li class="active">
-                        <i class="fas fa-tachometer-alt"></i>
-                        Dashboard
-                    </li>
-                    <li>
-                        <i class="fas fa-users"></i>
-                        Partners
-                    </li>
-                    <li>
-                        <i class="fas fa-chart-bar"></i>
-                        Analytics
-                    </li>
-                    <li>
-                        <i class="fas fa-cog"></i>
-                        Settings
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="nav-section">
-                <h3>BRANCHES</h3>
-                <ul class="nav-menu">
-                    <li>
-                        <i class="fas fa-code-branch"></i>
-                        0 Tags
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="nav-section">
-                <h3>ACTIONS</h3>
-                <ul class="nav-menu">
-                    <li>
-                        <i class="fas fa-code-pull-request"></i>
-                        Pull requests
-                    </li>
-                    <li>
-                        <i class="fas fa-play-circle"></i>
-                        Actions
-                    </li>
-                    <li>
-                        <i class="fas fa-project-diagram"></i>
-                        Projects
-                    </li>
-                    <li>
-                        <i class="fas fa-book"></i>
-                        Wiki
-                    </li>
-                    <li>
-                        <i class="fas fa-shield-alt"></i>
-                        Security
-                    </li>
-                    <li>
-                        <i class="fas fa-chart-line"></i>
-                        Insights
-                    </li>
-                    <li>
-                        <i class="fas fa-sliders-h"></i>
-                        Settings
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="nav-section">
-                <h3>PIN</h3>
-                <ul class="nav-menu">
-                    <li>
-                        <i class="fas fa-folder"></i>
-                        Go to file
-                    </li>
-                    <li>
-                        <i class="fas fa-plus-circle"></i>
-                        Add file
-                    </li>
-                    <li>
-                        <i class="fas fa-code"></i>
-                        Code
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="nav-section">
-                <h3>WATCH</h3>
-                <ul class="nav-menu">
-                    <li>
-                        <i class="fas fa-eye"></i>
-                        Watch
-                    </li>
-                    <li>
-                        <i class="fas fa-code-fork"></i>
-                        Fork
-                    </li>
-                    <li>
-                        <i class="fas fa-star"></i>
-                        Star
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Header -->
-            <header class="header">
-                <div class="header-left">
-                    <h1>Partner Dashboard</h1>
-                    <p class="subtitle">Manage partner waitlist and advertising requests</p>
-                </div>
-                <div class="header-right">
-                    <div class="user-profile">
-                        <img src="https://ui-avatars.com/api/?name=MEETIO+Admin&background=000&color=fff" alt="Admin">
-                        <span>meetioofficial</span>
+            <nav class="nav-links">
+                <a href="#guest">Be a Guest</a>
+                <a href="#sponsor">Sponsor Us</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Join the Conversation</h1>
+            <p>Be the next guest on <span class="highlight">MÉETIO Talk</span> - the podcast where students discuss major-related topics, innovations, and the future of their fields.</p>
+            <p>Share your expertise, connect with peers, and inspire the next generation.</p>
+        </section>
+        
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Guest Application Card -->
+            <div class="card" id="guest">
+                <h2 class="card-title">
+                    <i class="fas fa-microphone-alt"></i>
+                    Be Our Next Guest
+                </h2>
+                <p class="card-description">
+                    Fill out this form to join our guest waitlist. We're looking for passionate students to share insights about their major and career path.
+                </p>
+                
+                <form id="guestForm">
+                    <div class="form-group">
+                        <label for="guestName">Full Name *</label>
+                        <input type="text" id="guestName" placeholder="Alex Johnson" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guestEmail">Email Address *</label>
+                        <input type="email" id="guestEmail" placeholder="alex@university.edu" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guestWhatsApp">WhatsApp Number *</label>
+                        <input type="text" id="guestWhatsApp" placeholder="+1 (234) 567-8900" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guestMajor">Major / Field of Study *</label>
+                        <select id="guestMajor" required>
+                            <option value="">Select your major</option>
+                            <option value="Computer Science">Computer Science & AI</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Business">Business & Entrepreneurship</option>
+                            <option value="Medicine">Medicine & Healthcare</option>
+                            <option value="Arts">Arts & Design</option>
+                            <option value="Sciences">Natural Sciences</option>
+                            <option value="Social Sciences">Social Sciences</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guestYear">Current Year *</label>
+                        <select id="guestYear" required>
+                            <option value="">Select year</option>
+                            <option value="Freshman">Freshman</option>
+                            <option value="Sophomore">Sophomore</option>
+                            <option value="Junior">Junior</option>
+                            <option value="Senior">Senior</option>
+                            <option value="Graduate">Graduate Student</option>
+                            <option value="Alumni">Recent Alumni</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guestTopic">Proposed Topic *</label>
+                        <textarea id="guestTopic" placeholder="What specific topic related to your major would you like to discuss? Be detailed about your unique perspective." required></textarea>
+                    </div>
+                    
+                    <div class="loading" id="guestLoading">
+                        <div class="spinner"></div>
+                        <p>Submitting your application...</p>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="guestSubmitBtn">
+                        <i class="fas fa-user-plus"></i>
+                        Join Guest Waitlist
+                    </button>
+                </form>
+                
+                <div class="success-message" id="guestSuccessMessage">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Application Submitted!</strong>
+                        <p>Thank you for your interest in MÉETIO Talk! We'll review your application and contact you via WhatsApp or email within 5-7 days.</p>
                     </div>
                 </div>
-            </header>
-
-            <!-- Dashboard Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
+            </div>
+            
+            <!-- Sponsors & Ads Card -->
+            <div class="card" id="sponsor">
+                <h2 class="card-title">
+                    <i class="fas fa-handshake"></i>
+                    Sponsor & Advertise
+                </h2>
+                <p class="card-description">
+                    Reach thousands of students and young professionals through MÉETIO Talk. Partner with us to support meaningful conversations.
+                </p>
+                
+                <!-- Sponsors Grid -->
+                <h3 class="section-subtitle">
+                    <i class="fas fa-star"></i> Current Sponsors
+                </h3>
+                
+                <div class="sponsors-grid">
+                    <div class="sponsor-card">
+                        <div class="sponsor-icon">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="sponsor-name">Google</div>
+                        <div class="sponsor-tier">Platinum Sponsor</div>
                     </div>
-                    <div class="stat-info">
-                        <h3>Total Partners</h3>
-                        <p class="stat-number">127</p>
-                        <p class="stat-change">+12 this month</p>
+                    
+                    <div class="sponsor-card">
+                        <div class="sponsor-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="sponsor-name">GitHub</div>
+                        <div class="sponsor-tier">Education Partner</div>
+                    </div>
+                    
+                    <div class="sponsor-card">
+                        <div class="sponsor-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="sponsor-name">UniTech</div>
+                        <div class="sponsor-tier">Gold Sponsor</div>
+                    </div>
+                    
+                    <div class="sponsor-card">
+                        <div class="sponsor-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="sponsor-name">CodePath</div>
+                        <div class="sponsor-tier">Silver Sponsor</div>
                     </div>
                 </div>
                 
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Waitlist</h3>
-                        <p class="stat-number">42</p>
-                        <p class="stat-change">Pending review</p>
-                    </div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Growth</h3>
-                        <p class="stat-number">34%</p>
-                        <p class="stat-change">+5% from last month</p>
+                <!-- Ad Space Box -->
+                <div class="ad-box">
+                    <h3 class="ad-title">Advertising Opportunity</h3>
+                    <p class="ad-text">
+                        Our podcast reaches <strong>50,000+ students monthly</strong> across 30+ countries. 
+                        Perfect for educational tools, tech companies, and career services.
+                    </p>
+                    <div class="ad-contact">
+                        <i class="fas fa-envelope"></i> ads@meetiotalk.com
                     </div>
                 </div>
                 
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Revenue</h3>
-                        <p class="stat-number">$12.5K</p>
-                        <p class="stat-change">+$2.1K this month</p>
-                    </div>
+                <!-- Sponsor Form -->
+                <div class="sponsor-form-section">
+                    <h3 class="section-subtitle">
+                        <i class="fas fa-bullhorn"></i> Sponsor Inquiry
+                    </h3>
+                    
+                    <form id="sponsorForm">
+                        <div class="form-group">
+                            <label for="sponsorName">Company/Organization Name</label>
+                            <input type="text" id="sponsorName" placeholder="Your company name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sponsorEmail">Contact Email</label>
+                            <input type="email" id="sponsorEmail" placeholder="contact@company.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sponsorInterest">Interest Type</label>
+                            <select id="sponsorInterest">
+                                <option value="">Select interest</option>
+                                <option value="sponsorship">Podcast Sponsorship</option>
+                                <option value="advertising">Advertising</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn sponsor-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Inquiry
+                        </button>
+                    </form>
                 </div>
             </div>
-
-            <!-- Main Content Area -->
-            <div class="content-grid">
-                <!-- Waitlist Form Section -->
-                <section class="form-section">
-                    <div class="section-header">
-                        <h2><i class="fas fa-user-plus"></i> Partner Waitlist Signup</h2>
-                        <p>Join our exclusive partner network. We'll notify you when spots open.</p>
-                    </div>
-                    
-                    <div class="card">
-                        <form id="waitlistForm">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="companyName">Company Name *</label>
-                                    <input type="text" id="companyName" placeholder="Enter company name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="contactPerson">Contact Person *</label>
-                                    <input type="text" id="contactPerson" placeholder="Full name" required>
-                                </div>
-                            </div>
-                            
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="email">Email Address *</label>
-                                    <input type="email" id="email" placeholder="contact@company.com" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone">Phone Number</label>
-                                    <input type="tel" id="phone" placeholder="+1 (123) 456-7890">
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="companyType">Company Type *</label>
-                                <select id="companyType" required>
-                                    <option value="">Select type</option>
-                                    <option value="tech">Technology</option>
-                                    <option value="education">Education</option>
-                                    <option value="media">Media & Publishing</option>
-                                    <option value="startup">Startup</option>
-                                    <option value="enterprise">Enterprise</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="partnershipInterest">Partnership Interest *</label>
-                                <select id="partnershipInterest" required>
-                                    <option value="">Select interest</option>
-                                    <option value="advertising">Advertising</option>
-                                    <option value="sponsorship">Sponsorship</option>
-                                    <option value="content">Content Partnership</option>
-                                    <option value="integration">Platform Integration</option>
-                                    <option value="investment">Investment</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message">Additional Message</label>
-                                <textarea id="message" rows="3" placeholder="Tell us about your company and partnership goals..."></textarea>
-                            </div>
-                            
-                            <div class="form-footer">
-                                <button type="submit" class="btn-primary">
-                                    <i class="fas fa-paper-plane"></i>
-                                    Join Waitlist
-                                </button>
-                                <p class="form-note">We'll contact you within 3-5 business days</p>
-                            </div>
-                        </form>
-                        
-                        <div id="successMessage" class="success-message">
-                            <i class="fas fa-check-circle"></i>
-                            <div>
-                                <h3>Successfully Joined Waitlist!</h3>
-                                <p>Thank you for your interest. We've added you to our partner waitlist and will contact you soon.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Recent Activity & About Section -->
-                <section class="activity-section">
-                    <div class="section-header">
-                        <h2><i class="fas fa-history"></i> Recent Activity</h2>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="activity-list">
-                            <div class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="fas fa-user-plus"></i>
-                                </div>
-                                <div class="activity-content">
-                                    <p><strong>TechCorp Inc.</strong> joined the waitlist</p>
-                                    <span class="activity-time">2 hours ago</span>
-                                </div>
-                            </div>
-                            
-                            <div class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                                <div class="activity-content">
-                                    <p><strong>EduTech Solutions</strong> approved as partner</p>
-                                    <span class="activity-time">Yesterday</span>
-                                </div>
-                            </div>
-                            
-                            <div class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="fas fa-file-contract"></i>
-                                </div>
-                                <div class="activity-content">
-                                    <p>New advertising contract signed with <strong>MediaFlow</strong></p>
-                                    <span class="activity-time">2 days ago</span>
-                                </div>
-                            </div>
-                            
-                            <div class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
-                                <div class="activity-content">
-                                    <p>Monthly analytics report generated</p>
-                                    <span class="activity-time">1 week ago</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- About Section -->
-                    <div class="card about-card">
-                        <div class="section-header">
-                            <h2><i class="fas fa-info-circle"></i> About</h2>
-                        </div>
-                        <p>MEETIO Partner Waitlist Dashboard - A modern, minimalistic black & white dashboard for partner and advertising waitlist signups with Firebase integration.</p>
-                        
-                        <div class="metrics">
-                            <div class="metric">
-                                <span class="metric-number">0</span>
-                                <span class="metric-label">stars</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-number">0</span>
-                                <span class="metric-label">watching</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-number">0</span>
-                                <span class="metric-label">forks</span>
-                            </div>
-                        </div>
-                        
-                        <div class="deployment-info">
-                            <h4>Deployments</h4>
-                            <p class="deployment-count">10</p>
-                            <p class="deployment-detail">github-pages 2 weeks ago + 9 deployments</p>
-                        </div>
-                    </div>
-                </section>
+        </div>
+        
+        <!-- Timeline Section -->
+        <div class="timeline" id="about">
+            <h2 class="timeline-title">MÉETIO Journey</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2025</div>
+                <div class="timeline-content">GatherV2 0.30.0-universal</div>
             </div>
-        </main>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2024</div>
+                <div class="timeline-content">Affinity</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2023</div>
+                <div class="timeline-content">Sigburg Android Studio - Otter | 2...1 Patch 1</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2022</div>
+                <div class="timeline-content">doffp-habit-tracker-main Notion</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2021</div>
+                <div class="timeline-content">it-tracker-final Yesterday</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">Goals</div>
+                <div class="timeline-content">BIG GOALS Previous 7 Days</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2025</div>
+                <div class="timeline-content">30 2025 pics Previous 30 Days</div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer id="contact">
+            <div class="footer-links">
+                <a href="#guest">Be a Guest</a>
+                <a href="#sponsor">Sponsor Us</a>
+                <a href="mailto:hello@meetiotalk.com">Email Us</a>
+                <a href="https://github.com" target="_blank">GitHub</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            
+            <div class="copyright">
+                <p>MÉETIO Talk &copy; 2025 | Connecting students through meaningful conversations about their majors and futures.</p>
+                <p class="podcast-note">
+                    <i class="fas fa-podcast"></i> Listen wherever you get your podcasts
+                </p>
+            </div>
+        </footer>
     </div>
 
     <!-- Firebase SDKs -->

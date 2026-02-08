@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEETIO Partner Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fas fa-podcast"></i>
+                <span>MEETIO</span>
+            </div>
+            
+            <div class="nav-section">
+                <h3>MAIN</h3>
+                <ul class="nav-menu">
+                    <li class="active">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </li>
+                    <li>
+                        <i class="fas fa-users"></i>
+                        Partners
+                    </li>
+                    <li>
+                        <i class="fas fa-chart-bar"></i>
+                        Analytics
+                    </li>
+                    <li>
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h3>BRANCHES</h3>
+                <ul class="nav-menu">
+                    <li>
+                        <i class="fas fa-code-branch"></i>
+                        0 Tags
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h3>ACTIONS</h3>
+                <ul class="nav-menu">
+                    <li>
+                        <i class="fas fa-code-pull-request"></i>
+                        Pull requests
+                    </li>
+                    <li>
+                        <i class="fas fa-play-circle"></i>
+                        Actions
+                    </li>
+                    <li>
+                        <i class="fas fa-project-diagram"></i>
+                        Projects
+                    </li>
+                    <li>
+                        <i class="fas fa-book"></i>
+                        Wiki
+                    </li>
+                    <li>
+                        <i class="fas fa-shield-alt"></i>
+                        Security
+                    </li>
+                    <li>
+                        <i class="fas fa-chart-line"></i>
+                        Insights
+                    </li>
+                    <li>
+                        <i class="fas fa-sliders-h"></i>
+                        Settings
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h3>PIN</h3>
+                <ul class="nav-menu">
+                    <li>
+                        <i class="fas fa-folder"></i>
+                        Go to file
+                    </li>
+                    <li>
+                        <i class="fas fa-plus-circle"></i>
+                        Add file
+                    </li>
+                    <li>
+                        <i class="fas fa-code"></i>
+                        Code
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h3>WATCH</h3>
+                <ul class="nav-menu">
+                    <li>
+                        <i class="fas fa-eye"></i>
+                        Watch
+                    </li>
+                    <li>
+                        <i class="fas fa-code-fork"></i>
+                        Fork
+                    </li>
+                    <li>
+                        <i class="fas fa-star"></i>
+                        Star
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h1>Partner Dashboard</h1>
+                    <p class="subtitle">Manage partner waitlist and advertising requests</p>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=MEETIO+Admin&background=000&color=fff" alt="Admin">
+                        <span>meetioofficial</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Partners</h3>
+                        <p class="stat-number">127</p>
+                        <p class="stat-change">+12 this month</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Waitlist</h3>
+                        <p class="stat-number">42</p>
+                        <p class="stat-change">Pending review</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Growth</h3>
+                        <p class="stat-number">34%</p>
+                        <p class="stat-change">+5% from last month</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Revenue</h3>
+                        <p class="stat-number">$12.5K</p>
+                        <p class="stat-change">+$2.1K this month</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="content-grid">
+                <!-- Waitlist Form Section -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-user-plus"></i> Partner Waitlist Signup</h2>
+                        <p>Join our exclusive partner network. We'll notify you when spots open.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <form id="waitlistForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="companyName">Company Name *</label>
+                                    <input type="text" id="companyName" placeholder="Enter company name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactPerson">Contact Person *</label>
+                                    <input type="text" id="contactPerson" placeholder="Full name" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" id="email" placeholder="contact@company.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" placeholder="+1 (123) 456-7890">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="companyType">Company Type *</label>
+                                <select id="companyType" required>
+                                    <option value="">Select type</option>
+                                    <option value="tech">Technology</option>
+                                    <option value="education">Education</option>
+                                    <option value="media">Media & Publishing</option>
+                                    <option value="startup">Startup</option>
+                                    <option value="enterprise">Enterprise</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="partnershipInterest">Partnership Interest *</label>
+                                <select id="partnershipInterest" required>
+                                    <option value="">Select interest</option>
+                                    <option value="advertising">Advertising</option>
+                                    <option value="sponsorship">Sponsorship</option>
+                                    <option value="content">Content Partnership</option>
+                                    <option value="integration">Platform Integration</option>
+                                    <option value="investment">Investment</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Additional Message</label>
+                                <textarea id="message" rows="3" placeholder="Tell us about your company and partnership goals..."></textarea>
+                            </div>
+                            
+                            <div class="form-footer">
+                                <button type="submit" class="btn-primary">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Join Waitlist
+                                </button>
+                                <p class="form-note">We'll contact you within 3-5 business days</p>
+                            </div>
+                        </form>
+                        
+                        <div id="successMessage" class="success-message">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h3>Successfully Joined Waitlist!</h3>
+                                <p>Thank you for your interest. We've added you to our partner waitlist and will contact you soon.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Activity & About Section -->
+                <section class="activity-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-history"></i> Recent Activity</h2>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p><strong>TechCorp Inc.</strong> joined the waitlist</p>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p><strong>EduTech Solutions</strong> approved as partner</p>
+                                    <span class="activity-time">Yesterday</span>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-file-contract"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>New advertising contract signed with <strong>MediaFlow</strong></p>
+                                    <span class="activity-time">2 days ago</span>
+                                </div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Monthly analytics report generated</p>
+                                    <span class="activity-time">1 week ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- About Section -->
+                    <div class="card about-card">
+                        <div class="section-header">
+                            <h2><i class="fas fa-info-circle"></i> About</h2>
+                        </div>
+                        <p>MEETIO Partner Waitlist Dashboard - A modern, minimalistic black & white dashboard for partner and advertising waitlist signups with Firebase integration.</p>
+                        
+                        <div class="metrics">
+                            <div class="metric">
+                                <span class="metric-number">0</span>
+                                <span class="metric-label">stars</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-number">0</span>
+                                <span class="metric-label">watching</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-number">0</span>
+                                <span class="metric-label">forks</span>
+                            </div>
+                        </div>
+                        
+                        <div class="deployment-info">
+                            <h4>Deployments</h4>
+                            <p class="deployment-count">10</p>
+                            <p class="deployment-detail">github-pages 2 weeks ago + 9 deployments</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

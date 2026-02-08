@@ -5,28 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MEETIO Talk — Student Podcast</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Background Elements -->
-    <div class="background-elements">
-        <div class="bg-circle circle-1"></div>
-        <div class="bg-circle circle-2"></div>
-        <div class="bg-circle circle-3"></div>
-        <div class="bg-line line-1"></div>
-        <div class="bg-line line-2"></div>
-    </div>
-
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
             <div class="nav-logo">
                 <div class="logo-icon">
                     <svg viewBox="0 0 100 100" class="mic-icon">
-                        <path d="M50,20 C60,20 68,28 68,38 L68,50 C68,60 60,68 50,68 C40,68 32,60 32,50 L32,38 C32,28 40,20 50,20 Z" class="mic-head"/>
+                        <path d="M50,20 C60,20 68,28 68,38 L68,50 C68,60 60,68 50,68 C40,68 32,60 32,50 L32,38 C32,28 40,20 50,20 Z" 
+                              class="mic-head"/>
                         <path d="M50,68 L50,80" class="mic-stem"/>
                         <path d="M40,80 L60,80" class="mic-base"/>
+                        <path d="M50,85 L50,95 M45,95 L55,95" class="mic-stand"/>
                     </svg>
                 </div>
                 <div class="logo-text">
@@ -35,247 +28,279 @@
                 </div>
             </div>
             <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
                 <a href="#guest" class="nav-link">Be a Guest</a>
                 <a href="#sponsor" class="nav-link">Sponsor</a>
-                <a href="#content" class="nav-link">Content</a>
                 <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <button class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="hero-container">
-            <div class="hero-visual">
-                <div class="floating-mic">
-                    <svg viewBox="0 0 100 100" class="hero-mic">
-                        <path d="M50,15 C65,15 77,27 77,42 L77,58 C77,73 65,85 50,85 C35,85 23,73 23,58 L23,42 C23,27 35,15 50,15 Z" class="mic-head"/>
-                        <path d="M50,85 L50,95" class="mic-stem"/>
-                        <path d="M40,95 L60,95" class="mic-base"/>
-                    </svg>
-                    <div class="mic-glow"></div>
-                    <div class="sound-wave wave-1"></div>
-                    <div class="sound-wave wave-2"></div>
-                    <div class="sound-wave wave-3"></div>
-                </div>
-            </div>
             <div class="hero-content">
                 <h1 class="hero-title">
-                    <span class="title-line">Join the</span>
-                    <span class="title-line highlight">Conversation</span>
+                    <span>Join the</span>
+                    <span class="highlight">Conversation</span>
                 </h1>
                 <p class="hero-subtitle">
                     Be the next guest on MEETIO Talk — where students discuss major-related topics, innovations, and career insights.
                 </p>
                 <div class="hero-actions">
                     <a href="#guest" class="btn btn-primary">
+                        <i class="fas fa-microphone-alt"></i>
                         <span>Apply as Guest</span>
-                        <i class="fas fa-arrow-right"></i>
                     </a>
                     <a href="#sponsor" class="btn btn-secondary">
+                        <i class="fas fa-handshake"></i>
                         <span>Sponsor Us</span>
                     </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-mic">
+                    <svg viewBox="0 0 120 120" class="mic-svg">
+                        <path d="M60,25 C75,25 87,37 87,52 L87,68 C87,83 75,95 60,95 C45,95 33,83 33,68 L33,52 C33,37 45,25 60,25 Z" 
+                              class="mic-head"/>
+                        <path d="M60,95 L60,105" class="mic-stem"/>
+                        <path d="M50,105 L70,105" class="mic-base"/>
+                        <path d="M60,110 L60,115 M55,115 L65,115" class="mic-stand"/>
+                    </svg>
+                    <div class="mic-glow"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Application Modal -->
-    <div class="modal" id="applicationModal">
-        <div class="modal-backdrop"></div>
+    <!-- Application Modals -->
+    <div class="modal" id="guestModal">
+        <div class="modal-overlay"></div>
         <div class="modal-container">
             <div class="modal-header">
-                <h2>Guest Application</h2>
+                <h2><i class="fas fa-microphone-alt"></i> Guest Application</h2>
                 <button class="modal-close">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="modal-body">
                 <form id="guestForm">
-                    <div class="form-section">
-                        <h3>Personal Information</h3>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="name">Full Name</label>
-                                <input type="text" id="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="whatsapp">WhatsApp Number</label>
-                                <input type="tel" id="whatsapp" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="university">University</label>
-                                <input type="text" id="university" required>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="guestName">Full Name *</label>
+                        <input type="text" id="guestName" placeholder="John Doe" required>
                     </div>
-
-                    <div class="form-section">
-                        <h3>Academic Details</h3>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="major">Major / Field</label>
-                                <select id="major" required>
-                                    <option value="">Select your major</option>
-                                    <option value="Computer Science">Computer Science & AI</option>
-                                    <option value="Engineering">Engineering</option>
-                                    <option value="Business">Business</option>
-                                    <option value="Medicine">Medicine</option>
-                                    <option value="Arts">Arts & Design</option>
-                                    <option value="Sciences">Sciences</option>
-                                    <option value="Social Sciences">Social Sciences</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                            <div class="form-group" id="otherMajorGroup" style="display: none;">
-                                <label for="otherMajor">Specify Major</label>
-                                <input type="text" id="otherMajor">
-                            </div>
-                            <div class="form-group">
-                                <label for="year">Current Year</label>
-                                <select id="year" required>
-                                    <option value="">Select year</option>
-                                    <option value="Freshman">Freshman</option>
-                                    <option value="Sophomore">Sophomore</option>
-                                    <option value="Junior">Junior</option>
-                                    <option value="Senior">Senior</option>
-                                    <option value="Graduate">Graduate</option>
-                                </select>
-                            </div>
-                        </div>
+                    
+                    <div class="form-group">
+                        <label for="guestEmail">Email Address *</label>
+                        <input type="email" id="guestEmail" placeholder="john@university.edu" required>
                     </div>
-
-                    <div class="form-section">
-                        <h3>Podcast Details</h3>
-                        <div class="form-group">
-                            <label for="topic">Discussion Topic</label>
-                            <textarea id="topic" rows="3" required></textarea>
-                            <div class="form-hint">What specific topic would you like to discuss?</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="bio">Short Bio (Optional)</label>
-                            <textarea id="bio" rows="2"></textarea>
-                        </div>
+                    
+                    <div class="form-group">
+                        <label for="guestWhatsapp">WhatsApp Number *</label>
+                        <input type="tel" id="guestWhatsapp" placeholder="+1234567890" required>
                     </div>
-
-                    <div class="form-submit">
-                        <button type="submit" class="btn btn-primary btn-submit">
-                            <span>Submit Application</span>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
+                    
+                    <div class="form-group">
+                        <label for="guestMajor">Major / Field of Study *</label>
+                        <select id="guestMajor" required>
+                            <option value="">Select your major</option>
+                            <option value="Computer Science">Computer Science & AI</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Business">Business & Entrepreneurship</option>
+                            <option value="Medicine">Medicine & Healthcare</option>
+                            <option value="Arts">Arts & Design</option>
+                            <option value="Sciences">Natural Sciences</option>
+                            <option value="Social Sciences">Social Sciences</option>
+                            <option value="Other">Other (Please specify)</option>
+                        </select>
                     </div>
+                    
+                    <div class="form-group" id="otherMajorContainer">
+                        <label for="otherMajor">Specify Your Major *</label>
+                        <input type="text" id="otherMajor" placeholder="Enter your major">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guestTopic">Topic to Discuss *</label>
+                        <textarea id="guestTopic" placeholder="What specific topic related to your major would you like to discuss?" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guestBio">Short Bio (Optional)</label>
+                        <textarea id="guestBio" placeholder="Tell us about yourself..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-submit">
+                        <i class="fas fa-paper-plane"></i>
+                        Submit Application
+                    </button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Main Content Sections -->
-    <main class="main-content">
+    <div class="modal" id="sponsorModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2><i class="fas fa-handshake"></i> Sponsor Inquiry</h2>
+                <button class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="sponsorForm">
+                    <div class="form-group">
+                        <label for="sponsorName">Company / Organization Name *</label>
+                        <input type="text" id="sponsorName" placeholder="Your company name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sponsorEmail">Contact Email *</label>
+                        <input type="email" id="sponsorEmail" placeholder="contact@company.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sponsorPhone">Phone Number</label>
+                        <input type="tel" id="sponsorPhone" placeholder="+1234567890">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sponsorType">Sponsorship Type *</label>
+                        <select id="sponsorType" required>
+                            <option value="">Select type</option>
+                            <option value="Podcast Sponsor">Podcast Sponsorship</option>
+                            <option value="Advertising">Advertising</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sponsorBudget">Budget Range *</label>
+                        <select id="sponsorBudget" required>
+                            <option value="">Select budget</option>
+                            <option value="$500 - $1,000">$500 - $1,000</option>
+                            <option value="$1,000 - $5,000">$1,000 - $5,000</option>
+                            <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                            <option value="$10,000+">$10,000+</option>
+                            <option value="Custom">Custom Package</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sponsorMessage">Message (Optional)</label>
+                        <textarea id="sponsorMessage" placeholder="Tell us about your company and sponsorship goals..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-submit">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Inquiry
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
         <!-- Guest & Sponsor Cards -->
         <section class="cards-section">
             <div class="container">
                 <div class="cards-grid">
                     <!-- Guest Card -->
                     <div class="card guest-card" id="guest">
-                        <div class="card-icon">
-                            <i class="fas fa-microphone"></i>
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-microphone-alt"></i>
+                            </div>
+                            <h2 class="card-title">Be Our Next Guest</h2>
                         </div>
-                        <h2 class="card-title">Be Our Next Guest</h2>
-                        <p class="card-description">
-                            Share your expertise and experiences with thousands of students worldwide. Join our podcast as a featured guest.
-                        </p>
-                        <div class="card-features">
-                            <div class="feature">
-                                <i class="fas fa-check"></i>
-                                <span>45-minute conversation</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-check"></i>
-                                <span>Promoted on all platforms</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-check"></i>
-                                <span>Networking opportunities</span>
-                            </div>
+                        <div class="card-body">
+                            <p class="card-description">
+                                Share your knowledge and experiences with thousands of students. Discuss topics related to your major and career path.
+                            </p>
+                            <ul class="card-features">
+                                <li><i class="fas fa-check"></i> 45-minute recorded conversation</li>
+                                <li><i class="fas fa-check"></i> Promoted on all platforms</li>
+                                <li><i class="fas fa-check"></i> Professional audio editing</li>
+                                <li><i class="fas fa-check"></i> Network with other students</li>
+                            </ul>
                         </div>
-                        <button class="btn btn-outline open-modal" data-target="applicationModal">
-                            Apply Now
-                        </button>
+                        <div class="card-footer">
+                            <button class="btn btn-primary open-modal" data-modal="guestModal">
+                                <i class="fas fa-user-plus"></i>
+                                Apply Now
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Sponsor Card -->
                     <div class="card sponsor-card" id="sponsor">
-                        <div class="card-icon">
-                            <i class="fas fa-handshake"></i>
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h2 class="card-title">Sponsor Our Podcast</h2>
                         </div>
-                        <h2 class="card-title">Sponsor Our Podcast</h2>
-                        <p class="card-description">
-                            Reach a highly engaged student audience. Partner with us to support meaningful conversations.
-                        </p>
-                        <div class="card-features">
-                            <div class="feature">
-                                <i class="fas fa-chart-line"></i>
-                                <span>50K+ monthly reach</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-users"></i>
-                                <span>85% student audience</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-globe"></i>
-                                <span>30+ countries</span>
+                        <div class="card-body">
+                            <p class="card-description">
+                                Reach a highly engaged student audience across 30+ countries. Perfect for educational and tech companies.
+                            </p>
+                            <div class="sponsor-stats">
+                                <div class="stat">
+                                    <div class="stat-number">50K+</div>
+                                    <div class="stat-label">Monthly Reach</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">85%</div>
+                                    <div class="stat-label">Student Audience</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">30+</div>
+                                    <div class="stat-label">Countries</div>
+                                </div>
                             </div>
                         </div>
-                        <div class="sponsor-contact">
-                            <div class="contact-info">
+                        <div class="card-footer">
+                            <button class="btn btn-secondary open-modal" data-modal="sponsorModal">
                                 <i class="fas fa-envelope"></i>
-                                <span>sponsor@meetiotalk.com</span>
-                            </div>
-                            <div class="contact-info">
-                                <i class="fas fa-phone"></i>
-                                <span>Response within 24h</span>
-                            </div>
+                                Contact Us
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- YouTube Content Section -->
-        <section class="content-section" id="content">
+        <!-- YouTube Section -->
+        <section class="youtube-section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Latest Content</h2>
-                    <p class="section-subtitle">Watch our latest podcast episodes and interviews</p>
+                    <h2 class="section-title">Latest Episodes</h2>
+                    <p class="section-subtitle">Watch our podcast episodes on YouTube</p>
                 </div>
-                <div class="video-grid">
+                <div class="youtube-grid">
                     <!-- Video Placeholder 1 -->
                     <div class="video-card">
                         <div class="video-thumbnail">
-                            <div class="thumbnail-placeholder">
+                            <div class="thumbnail-overlay">
                                 <i class="fas fa-play"></i>
-                                <div class="thumbnail-overlay">
-                                    <span>Coming Soon</span>
-                                </div>
                             </div>
+                            <div class="video-badge">Coming Soon</div>
                         </div>
                         <div class="video-info">
-                            <h3 class="video-title">Episode 1 Preview</h3>
-                            <p class="video-description">Our first episode featuring innovative students</p>
+                            <h3 class="video-title">Episode 1: Tech Innovations</h3>
+                            <p class="video-description">Students discuss latest tech trends and innovations in their fields.</p>
                             <div class="video-meta">
-                                <span class="meta-item">
-                                    <i class="fas fa-calendar"></i>
-                                    <span>Coming February 2025</span>
-                                </span>
+                                <span><i class="fas fa-calendar"></i> Feb 2025</span>
+                                <span><i class="fas fa-clock"></i> 45 min</span>
                             </div>
                         </div>
                     </div>
@@ -283,21 +308,17 @@
                     <!-- Video Placeholder 2 -->
                     <div class="video-card">
                         <div class="video-thumbnail">
-                            <div class="thumbnail-placeholder">
+                            <div class="thumbnail-overlay">
                                 <i class="fas fa-play"></i>
-                                <div class="thumbnail-overlay">
-                                    <span>In Production</span>
-                                </div>
                             </div>
+                            <div class="video-badge">In Production</div>
                         </div>
                         <div class="video-info">
-                            <h3 class="video-title">Tech Innovations</h3>
-                            <p class="video-description">Students revolutionizing technology fields</p>
+                            <h3 class="video-title">Episode 2: Career Paths</h3>
+                            <p class="video-description">Navigating post-graduation opportunities and career planning.</p>
                             <div class="video-meta">
-                                <span class="meta-item">
-                                    <i class="fas fa-calendar"></i>
-                                    <span>March 2025</span>
-                                </span>
+                                <span><i class="fas fa-calendar"></i> Mar 2025</span>
+                                <span><i class="fas fa-clock"></i> 50 min</span>
                             </div>
                         </div>
                     </div>
@@ -305,49 +326,64 @@
                     <!-- Video Placeholder 3 -->
                     <div class="video-card">
                         <div class="video-thumbnail">
-                            <div class="thumbnail-placeholder">
+                            <div class="thumbnail-overlay">
                                 <i class="fas fa-play"></i>
-                                <div class="thumbnail-overlay">
-                                    <span>Coming Soon</span>
-                                </div>
                             </div>
+                            <div class="video-badge">Coming Soon</div>
                         </div>
                         <div class="video-info">
-                            <h3 class="video-title">Career Paths</h3>
-                            <p class="video-description">Navigating post-graduation opportunities</p>
+                            <h3 class="video-title">Episode 3: Research Insights</h3>
+                            <p class="video-description">Student researchers share their findings and methodologies.</p>
                             <div class="video-meta">
-                                <span class="meta-item">
-                                    <i class="fas fa-calendar"></i>
-                                    <span>April 2025</span>
-                                </span>
+                                <span><i class="fas fa-calendar"></i> Apr 2025</span>
+                                <span><i class="fas fa-clock"></i> 55 min</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="content-cta">
+                <div class="section-cta">
                     <a href="#" class="btn btn-secondary">
                         <i class="fab fa-youtube"></i>
-                        <span>View More on YouTube</span>
+                        Subscribe on YouTube
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- About MEETIO Section -->
+        <!-- About Section -->
         <section class="about-section" id="about">
             <div class="container">
                 <div class="about-grid">
                     <div class="about-content">
                         <h2 class="section-title">About MEETIO</h2>
                         <p class="about-description">
-                            MEETIO is a platform dedicated to connecting students through meaningful conversations about their academic journeys, career aspirations, and innovative ideas.
+                            MEETIO is a platform connecting students through meaningful conversations about their academic journeys, innovations, and career aspirations. Our podcast brings together passionate students to share insights and experiences.
                         </p>
-                        <div class="about-timeline">
+                        <div class="about-features">
+                            <div class="feature">
+                                <i class="fas fa-users"></i>
+                                <h4>Student Community</h4>
+                                <p>Connecting students from various majors and universities</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-lightbulb"></i>
+                                <h4>Knowledge Sharing</h4>
+                                <p>Sharing insights and experiences about academic and career paths</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-globe"></i>
+                                <h4>Global Reach</h4>
+                                <p>Audience spanning across 30+ countries worldwide</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-visual">
+                        <div class="timeline">
                             <div class="timeline-item">
                                 <div class="timeline-year">2025</div>
                                 <div class="timeline-content">
                                     <h4>GatherV2 0.30.0-universal</h4>
-                                    <p>Platform expansion and universal compatibility</p>
+                                    <p>Platform expansion with universal compatibility</p>
                                 </div>
                             </div>
                             <div class="timeline-item">
@@ -360,20 +396,51 @@
                             <div class="timeline-item">
                                 <div class="timeline-year">2023</div>
                                 <div class="timeline-content">
-                                    <h4>Android Studio Integration</h4>
+                                    <h4>Android Studio-Otter</h4>
                                     <p>Mobile development and technical infrastructure</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="about-visual">
-                        <div class="visual-container">
-                            <div class="floating-element">
-                                <div class="element element-1"></div>
-                                <div class="element element-2"></div>
-                                <div class="element element-3"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h2 class="section-title">Get in Touch</h2>
+                        <p class="contact-description">
+                            Have questions about being a guest or sponsoring our podcast? Reach out to us!
+                        </p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>contact@meetiotalk.com</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <h4>Response Time</h4>
+                                    <p>Within 24 hours</p>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="contact-actions">
+                        <button class="btn btn-primary open-modal" data-modal="guestModal">
+                            <i class="fas fa-microphone-alt"></i>
+                            Apply as Guest
+                        </button>
+                        <button class="btn btn-secondary open-modal" data-modal="sponsorModal">
+                            <i class="fas fa-handshake"></i>
+                            Sponsor Inquiry
+                        </button>
                     </div>
                 </div>
             </div>
@@ -383,14 +450,16 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-grid">
+            <div class="footer-content">
                 <div class="footer-brand">
                     <div class="nav-logo">
                         <div class="logo-icon">
                             <svg viewBox="0 0 100 100" class="mic-icon">
-                                <path d="M50,20 C60,20 68,28 68,38 L68,50 C68,60 60,68 50,68 C40,68 32,60 32,50 L32,38 C32,28 40,20 50,20 Z" class="mic-head"/>
+                                <path d="M50,20 C60,20 68,28 68,38 L68,50 C68,60 60,68 50,68 C40,68 32,60 32,50 L32,38 C32,28 40,20 50,20 Z" 
+                                      class="mic-head"/>
                                 <path d="M50,68 L50,80" class="mic-stem"/>
                                 <path d="M40,80 L60,80" class="mic-base"/>
+                                <path d="M50,85 L50,95 M45,95 L55,95" class="mic-stand"/>
                             </svg>
                         </div>
                         <div class="logo-text">
@@ -399,33 +468,27 @@
                         </div>
                     </div>
                     <p class="footer-tagline">
-                        Connecting students through meaningful conversations about majors, careers, and innovation.
+                        Connecting students through meaningful conversations about majors and careers.
                     </p>
                 </div>
                 <div class="footer-links">
-                    <div class="link-group">
+                    <div class="footer-column">
                         <h4>Quick Links</h4>
+                        <a href="#home">Home</a>
                         <a href="#guest">Be a Guest</a>
-                        <a href="#sponsor">Sponsor Us</a>
-                        <a href="#content">Watch Content</a>
+                        <a href="#sponsor">Sponsor</a>
                         <a href="#about">About</a>
                     </div>
-                    <div class="link-group">
+                    <div class="footer-column">
                         <h4>Connect</h4>
                         <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
                         <a href="#"><i class="fab fa-spotify"></i> Spotify</a>
                         <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                        <a href="#"><i class="fab fa-github"></i> GitHub</a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="copyright">MEETIO Talk © 2025. All rights reserved.</p>
-                <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="mailto:contact@meetiotalk.com">Contact</a>
-                </div>
+                <p class="copyright">© 2025 MEETIO Talk. All rights reserved.</p>
             </div>
         </div>
     </footer>

@@ -1,4 +1,4 @@
-// Firebase Configuration
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAMminfEEddBjL-I1ms9zqtUuoNE_eeXx8",
     authDomain: "meetio-dashboard.firebaseapp.com",
@@ -10,238 +10,402 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+let db;
+try {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    console.log("Firebase initialized successfully");
+} catch (error) {
+    console.error("Firebase initialization error:", error);
+}
 
 // DOM Elements
-const waitlistForm = document.getElementById('waitlistForm');
-const successMessage = document.getElementById('successMessage');
+const guestForm = document.getElementById('guestForm');
+const guestSuccessMessage = document.getElementById('guestSuccessMessage');
+const guestLoading = document.getElementById('guestLoading');
+const guestSubmitBtn = document.getElementById('guestSubmitBtn');
+const sponsorForm = document.getElementById('sponsorForm');
 
-// Form Submission Handler
-waitlistForm.addEventListener('submit', async function(e) {
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('MÉETIO Talk website loaded!');
+    
+    // Initialize form event listeners
+    initializeForms();
+    
+    // Initialize smooth scrolling
+    initializeSmoothScrolling();
+    
+    // Initialize timeline effects
+    initializeTimelineEffects();
+    
+    // Initialize button animations
+    initializeButtonEffects();
+    
+    // Check if Firebase is initialized
+    if (!db) {
+        console.warn("Firebase not initialized. Forms will not submit data.");
+        showFirebaseWarning();
+    }
+});
+
+// Show warning if Firebase fails to initialize
+function showFirebaseWarning() {
+    const warning = document.createElement('div');
+    warning.style.cssText = `
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid #EF4444;
+        color: #FCA5A5;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+    `;
+    warning.innerHTML = `
+        <strong><i class="fas fa-exclamation-triangle"></i> Database Connection Issue</strong>
+        <p style="margin-top: 5px;">Form submissions are currently in demo mode. Please check Firebase configuration for full functionality.</p>
+    `;
+    
+    const formsContainer = document.querySelector('.main-grid');
+    if (formsContainer) {
+        formsContainer.insertBefore(warning, formsContainer.firstChild);
+    }
+}
+
+// Initialize form event listeners
+function initializeForms() {
+    // Guest Form Submission
+    if (guestForm) {
+        guestForm.addEventListener('submit', handleGuestFormSubmit);
+        
+        // Add validation styling
+        const guestInputs = guestForm.querySelectorAll('input, select, textarea');
+        guestInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+            
+            input.addEventListener('input', function() {
+                clearFieldError(this);
+            });
+        });
+    }
+    
+    // Sponsor Form Submission
+    if (sponsorForm) {
+        sponsorForm.addEventListener('submit', handleSponsorFormSubmit);
+    }
+}
+
+// Handle Guest Form Submission
+async function handleGuestFormSubmit(e) {
+    e.preventDefault();
+    
+    // Validate form
+    if (!validateForm(guestForm)) {
+        return;
+    }
+    
+    // Get form values
+    const formData = {
+        name: document.getElementById('guestName').value.trim(),
+        email: document.getElementById('guestEmail').value.trim(),
+        whatsapp: document.getElementById('guestWhatsApp').value.trim(),
+        major: document.getElementById('guestMajor').value,
+        year: document.getElementById('guestYear').value,
+        topic: document.getElementById('guestTopic').value.trim(),
+        timestamp: new Date().toISOString(),
+        status: 'pending',
+        type: 'guest'
+    };
+    
+    // Show loading state
+    if (guestLoading && guestSubmitBtn) {
+        guestLoading.classList.add('show');
+        guestSubmitBtn.style.display = 'none';
+    }
+    
+    try {
+        // If Firebase is available, save to database
+        if (db) {
+            await db.collection('guestApplications').add({
+                ...formData,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            console.log('Guest application saved to Firestore');
+        } else {
+            // Demo mode - simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            console.log('Guest application (demo):', formData);
+        }
+        
+        // Show success message
+        if (guestSuccessMessage) {
+            guestSuccessMessage.classList.add('show');
+        }
+        
+        // Reset form
+        guestForm.reset();
+        
+        // Hide loading and show button again
+        setTimeout(() => {
+            if (guestLoading && guestSubmitBtn) {
+                guestLoading.classList.remove('show');
+                guestSubmitBtn.style.display = 'flex';
+            }
+            
+            // Hide success message after 5 seconds
+            if (guestSuccessMessage) {
+                setTimeout(() => {
+                    guestSuccessMessage.classList.remove('show');
+                }, 5000);
+            }
+        }, 2000);
+        
+        // Update activity feed (simulated)
+        updateActivityFeed(formData.name);
+        
+    } catch (error) {
+        console.error('Error submitting guest application:', error);
+        
+        // Show error message
+        alert('There was an error submitting your application. Please try again.');
+        
+        // Reset loading state
+        if (guestLoading && guestSubmitBtn) {
+            guestLoading.classList.remove('show');
+            guestSubmitBtn.style.display = 'flex';
+        }
+    }
+}
+
+// Handle Sponsor Form Submission
+async function handleSponsorFormSubmit(e) {
     e.preventDefault();
     
     // Get form values
-    const companyName = document.getElementById('companyName').value;
-    const contactPerson = document.getElementById('contactPerson').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const companyType = document.getElementById('companyType').value;
-    const partnershipInterest = document.getElementById('partnershipInterest').value;
-    const message = document.getElementById('message').value;
-    
-    // Create submission data
-    const submissionData = {
-        companyName,
-        contactPerson,
-        email,
-        phone: phone || 'Not provided',
-        companyType,
-        partnershipInterest,
-        message: message || 'No additional message',
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        status: 'pending'
+    const formData = {
+        company: document.getElementById('sponsorName').value.trim(),
+        email: document.getElementById('sponsorEmail').value.trim(),
+        interest: document.getElementById('sponsorInterest').value,
+        timestamp: new Date().toISOString(),
+        status: 'new',
+        type: 'sponsor'
     };
     
+    // Basic validation
+    if (!formData.company || !formData.email || !formData.interest) {
+        alert('Please fill in all fields before submitting.');
+        return;
+    }
+    
+    // Get submit button
+    const submitBtn = sponsorForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    
+    // Show loading state
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitBtn.disabled = true;
+    
     try {
-        // Show loading state on button
-        const submitBtn = waitlistForm.querySelector('.btn-primary');
-        const originalBtnText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-        submitBtn.disabled = true;
-        
-        // Save to Firestore
-        await db.collection('partnerWaitlist').add(submissionData);
+        // If Firebase is available, save to database
+        if (db) {
+            await db.collection('sponsorInquiries').add({
+                ...formData,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            console.log('Sponsor inquiry saved to Firestore');
+        } else {
+            // Demo mode - simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            console.log('Sponsor inquiry (demo):', formData);
+        }
         
         // Show success message
-        successMessage.style.display = 'flex';
+        alert('Thank you for your interest! We\'ll contact you within 2-3 business days.');
         
         // Reset form
-        waitlistForm.reset();
-        
-        // Reset button
-        setTimeout(() => {
-            submitBtn.innerHTML = originalBtnText;
-            submitBtn.disabled = false;
-        }, 2000);
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-            successMessage.style.display = 'none';
-        }, 5000);
-        
-        // Update recent activity in the UI
-        updateRecentActivity(companyName);
+        sponsorForm.reset();
         
     } catch (error) {
-        console.error('Error submitting form:', error);
-        alert('There was an error submitting your request. Please try again.');
-        
-        // Reset button in case of error
-        const submitBtn = waitlistForm.querySelector('.btn-primary');
-        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Join Waitlist';
+        console.error('Error submitting sponsor inquiry:', error);
+        alert('There was an error submitting your inquiry. Please try again.');
+    } finally {
+        // Reset button state
+        submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
     }
-});
-
-// Update recent activity in the UI
-function updateRecentActivity(companyName) {
-    const activityList = document.querySelector('.activity-list');
-    const now = new Date();
-    const timeString = getTimeAgo(now);
-    
-    const newActivity = document.createElement('div');
-    newActivity.className = 'activity-item';
-    newActivity.innerHTML = `
-        <div class="activity-icon">
-            <i class="fas fa-user-plus"></i>
-        </div>
-        <div class="activity-content">
-            <p><strong>${companyName}</strong> joined the waitlist</p>
-            <span class="activity-time">${timeString}</span>
-        </div>
-    `;
-    
-    // Add to the top of the activity list
-    activityList.insertBefore(newActivity, activityList.firstChild);
-    
-    // Update waitlist count in stats
-    updateWaitlistCount();
 }
 
-// Get time ago string
-function getTimeAgo(date) {
-    const now = new Date();
-    const diffInSeconds = Math.floor((now - date) / 1000);
+// Form validation functions
+function validateForm(form) {
+    let isValid = true;
+    const requiredFields = form.querySelectorAll('[required]');
     
-    if (diffInSeconds < 60) return 'Just now';
-    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
-    if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
-    return `${Math.floor(diffInSeconds / 86400)} days ago`;
-}
-
-// Update waitlist count in stats
-function updateWaitlistCount() {
-    const waitlistNumber = document.querySelector('.stat-card:nth-child(2) .stat-number');
-    const currentCount = parseInt(waitlistNumber.textContent);
-    waitlistNumber.textContent = currentCount + 1;
-}
-
-// Load existing waitlist count from Firestore
-async function loadWaitlistCount() {
-    try {
-        const snapshot = await db.collection('partnerWaitlist').where('status', '==', 'pending').get();
-        const count = snapshot.size;
-        
-        // Update the waitlist count in the UI
-        const waitlistNumber = document.querySelector('.stat-card:nth-child(2) .stat-number');
-        if (waitlistNumber) {
-            waitlistNumber.textContent = count;
+    requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+            markFieldAsError(field);
+            isValid = false;
         }
-        
-        // Update total partners count (pending + approved)
-        const totalSnapshot = await db.collection('partnerWaitlist').get();
-        const totalPartners = document.querySelector('.stat-card:first-child .stat-number');
-        if (totalPartners) {
-            totalPartners.textContent = totalSnapshot.size;
-        }
-        
-    } catch (error) {
-        console.error('Error loading waitlist count:', error);
-    }
-}
-
-// Load recent activities from Firestore
-async function loadRecentActivities() {
-    try {
-        const snapshot = await db.collection('partnerWaitlist')
-            .orderBy('timestamp', 'desc')
-            .limit(4)
-            .get();
-        
-        const activityList = document.querySelector('.activity-list');
-        
-        // Clear existing activities (except the first one which is a placeholder)
-        while (activityList.children.length > 0) {
-            activityList.removeChild(activityList.firstChild);
-        }
-        
-        // Add activities from Firestore
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            const timeAgo = data.timestamp ? getTimeAgo(data.timestamp.toDate()) : 'Recently';
-            
-            const activityItem = document.createElement('div');
-            activityItem.className = 'activity-item';
-            activityItem.innerHTML = `
-                <div class="activity-icon">
-                    <i class="fas fa-user-plus"></i>
-                </div>
-                <div class="activity-content">
-                    <p><strong>${data.companyName}</strong> joined the waitlist</p>
-                    <span class="activity-time">${timeAgo}</span>
-                </div>
-            `;
-            
-            activityList.appendChild(activityItem);
-        });
-        
-    } catch (error) {
-        console.error('Error loading recent activities:', error);
-    }
-}
-
-// Initialize dashboard when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('MEETIO Partner Dashboard loaded');
-    
-    // Load initial data
-    loadWaitlistCount();
-    loadRecentActivities();
-    
-    // Add click handlers to navigation items
-    const navItems = document.querySelectorAll('.nav-menu li');
-    navItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Remove active class from all items
-            navItems.forEach(i => i.classList.remove('active'));
-            // Add active class to clicked item
-            this.classList.add('active');
-            
-            // Simulate navigation (in a real app, this would load different content)
-            const itemText = this.textContent.trim();
-            console.log(`Navigating to: ${itemText}`);
-        });
     });
     
-    // Initialize form validation
-    const formInputs = document.querySelectorAll('#waitlistForm input, #waitlistForm select');
-    formInputs.forEach(input => {
-        input.addEventListener('blur', function() {
-            if (this.hasAttribute('required') && !this.value.trim()) {
-                this.style.borderColor = '#dc2626';
-            } else {
-                this.style.borderColor = '#d1d5db';
+    if (!isValid) {
+        alert('Please fill in all required fields marked with *');
+    }
+    
+    return isValid;
+}
+
+function validateField(field) {
+    if (field.hasAttribute('required') && !field.value.trim()) {
+        markFieldAsError(field);
+    } else {
+        clearFieldError(field);
+    }
+}
+
+function markFieldAsError(field) {
+    field.style.borderColor = '#EF4444';
+    field.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.2)';
+}
+
+function clearFieldError(field) {
+    field.style.borderColor = '';
+    field.style.boxShadow = '';
+}
+
+// Update activity feed (simulated)
+function updateActivityFeed(guestName) {
+    const activityItem = document.createElement('div');
+    activityItem.className = 'timeline-item';
+    activityItem.innerHTML = `
+        <div class="timeline-year">Now</div>
+        <div class="timeline-content">${guestName} joined the guest waitlist</div>
+    `;
+    
+    const timeline = document.querySelector('.timeline');
+    if (timeline) {
+        // Add after the timeline title
+        const timelineItems = timeline.querySelector('.timeline-item:first-child');
+        if (timelineItems) {
+            timeline.insertBefore(activityItem, timelineItems.nextSibling);
+            
+            // Add animation
+            activityItem.style.opacity = '0';
+            activityItem.style.transform = 'translateX(-20px)';
+            
+            setTimeout(() => {
+                activityItem.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                activityItem.style.opacity = '1';
+                activityItem.style.transform = 'translateX(0)';
+            }, 100);
+        }
+    }
+}
+
+// Initialize smooth scrolling
+function initializeSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// Initialize timeline effects
+function initializeTimelineEffects() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    // Add hover effects
+    timelineItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.borderLeftColor = 'var(--accent-neon)';
+            const yearElement = this.querySelector('.timeline-year');
+            if (yearElement) {
+                yearElement.style.color = 'var(--accent-neon)';
             }
         });
         
-        input.addEventListener('input', function() {
-            this.style.borderColor = '#d1d5db';
+        item.addEventListener('mouseleave', function() {
+            this.style.borderLeftColor = '';
+            const yearElement = this.querySelector('.timeline-year');
+            if (yearElement) {
+                yearElement.style.color = '';
+            }
         });
     });
-});
-
-// Add animation to stat cards on load
-window.addEventListener('load', function() {
-    const statCards = document.querySelectorAll('.stat-card');
-    statCards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
+    
+    // Animate timeline items on load
+    timelineItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-20px)';
         
         setTimeout(() => {
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, index * 100);
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            item.style.opacity = '1';
+            item.style.transform = 'translateX(0)';
+        }, 300 + (index * 100));
     });
-});
+}
+
+// Initialize button effects
+function initializeButtonEffects() {
+    const buttons = document.querySelectorAll('.btn');
+    
+    // Add pulsing effect to CTA buttons
+    buttons.forEach(btn => {
+        setInterval(() => {
+            btn.style.boxShadow = '0 0 20px rgba(176, 38, 255, 0.5)';
+            setTimeout(() => {
+                btn.style.boxShadow = '';
+            }, 1000);
+        }, 3000);
+    });
+}
+
+// Add neon glow to logo periodically
+setInterval(() => {
+    const logo = document.querySelector('.logo i');
+    if (logo) {
+        logo.style.filter = 'drop-shadow(0 0 12px var(--neon-purple))';
+        setTimeout(() => {
+            logo.style.filter = 'drop-shadow(0 0 8px var(--neon-purple))';
+        }, 500);
+    }
+}, 4000);
+
+// Initialize Firebase data listener (optional)
+function initializeFirebaseListener() {
+    if (!db) return;
+    
+    // Listen for new guest applications (optional - for real-time updates)
+    db.collection('guestApplications')
+        .orderBy('timestamp', 'desc')
+        .limit(5)
+        .onSnapshot((snapshot) => {
+            console.log(`Total guest applications: ${snapshot.size}`);
+        }, (error) => {
+            console.error("Error listening to guest applications:", error);
+        });
+}
+
+// Export functions for testing if needed
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        validateForm,
+        validateField,
+        handleGuestFormSubmit,
+        handleSponsorFormSubmit
+    };
+}

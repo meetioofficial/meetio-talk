@@ -1,33 +1,27 @@
-// Firebase configuration - Updated to meetio-talk project
+  <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+my js 
+// Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBTQUjmSjiBMw8_RsPCLsNWGgRvbRU3fP8",
-    authDomain: "meetio-talk.firebaseapp.com",
-    projectId: "meetio-talk",
-    storageBucket: "meetio-talk.firebasestorage.app",
-    messagingSenderId: "17881623554",
-    appId: "1:17881623554:web:e124f332bf0b3ac72a8b1b",
-    measurementId: "G-PPGF26BMRB"
+    apiKey: "AIzaSyAMminfEEddBjL-I1ms9zqtUuoNE_eeXx8",
+    authDomain: "meetio-dashboard.firebaseapp.com",
+    projectId: "meetio-dashboard",
+    storageBucket: "meetio-dashboard.firebasestorage.app",
+    messagingSenderId: "845443659530",
+    appId: "1:845443659530:web:5aa5ad2a59d377b9d96cf3",
+    measurementId: "G-9VQR8QPJKH"
 };
 
 // Initialize Firebase
 let db;
 try {
-    // Check if Firebase is already initialized
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    } else {
-        firebase.app(); // if already initialized, use that one
-    }
-    
+    firebase.initializeApp(firebaseConfig);
     db = firebase.firestore();
-    
-    // Enable offline persistence (optional but recommended)
-    db.enablePersistence()
-        .catch((err) => {
-            console.error("Firebase persistence error:", err);
-        });
-    
-    console.log("✅ Firebase initialized successfully with meetio-talk project");
+    console.log("✅ Firebase initialized successfully");
 } catch (error) {
     console.error("❌ Firebase initialization error:", error);
 }

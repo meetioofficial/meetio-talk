@@ -5,23 +5,36 @@
 </body>
 </html>
 my js 
-// Firebase configuration
+// Firebase configuration - Updated to meetio-talk project
 const firebaseConfig = {
-    apiKey: "AIzaSyAMminfEEddBjL-I1ms9zqtUuoNE_eeXx8",
-    authDomain: "meetio-dashboard.firebaseapp.com",
-    projectId: "meetio-dashboard",
-    storageBucket: "meetio-dashboard.firebasestorage.app",
-    messagingSenderId: "845443659530",
-    appId: "1:845443659530:web:5aa5ad2a59d377b9d96cf3",
-    measurementId: "G-9VQR8QPJKH"
+    apiKey: "AIzaSyBTQUjmSjiBMw8_RsPCLsNWGgRvbRU3fP8",
+    authDomain: "meetio-talk.firebaseapp.com",
+    projectId: "meetio-talk",
+    storageBucket: "meetio-talk.firebasestorage.app",
+    messagingSenderId: "17881623554",
+    appId: "1:17881623554:web:e124f332bf0b3ac72a8b1b",
+    measurementId: "G-PPGF26BMRB"
 };
 
 // Initialize Firebase
 let db;
 try {
-    firebase.initializeApp(firebaseConfig);
+    // Check if Firebase is already initialized
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    } else {
+        firebase.app(); // if already initialized, use that one
+    }
+    
     db = firebase.firestore();
-    console.log("✅ Firebase initialized successfully");
+    
+    // Enable offline persistence (optional but recommended)
+    db.enablePersistence()
+        .catch((err) => {
+            console.error("Firebase persistence error:", err);
+        });
+    
+    console.log("✅ Firebase initialized successfully with meetio-talk project");
 } catch (error) {
     console.error("❌ Firebase initialization error:", error);
 }

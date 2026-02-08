@@ -512,3 +512,47 @@ if (typeof module !== 'undefined' && module.exports) {
         showToast
     };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// Add photo error handling
+document.addEventListener('DOMContentLoaded', function() {
+    const hostPhoto = document.querySelector('.host-photo');
+    
+    // Replace with your actual photo URL when ready
+    const actualPhotoUrl = 'YOUR_PHOTO_URL_HERE'; // Replace this
+    
+    // If you want to use a placeholder until you have your photo
+    if (hostPhoto && !hostPhoto.src.includes('unsplash')) {
+        // Use initials as fallback
+        hostPhoto.onerror = function() {
+            this.style.display = 'none';
+            const frame = this.closest('.photo-frame');
+            const initials = document.createElement('div');
+            initials.className = 'photo-initials';
+            initials.innerHTML = 'K';
+            initials.style.cssText = `
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, var(--primary-color), var(--primary-lighter));
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 4rem;
+                font-weight: bold;
+            `;
+            frame.appendChild(initials);
+        };
+    }
+});
